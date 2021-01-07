@@ -44,12 +44,12 @@ class ShoppingViewModel @ViewModelInject constructor(
         _currentImageUrl.postValue(url)
     }
 
-    private fun deleteShoppingItem(shoppingItem: ShoppingItem) =
+    fun deleteShoppingItem(shoppingItem: ShoppingItem) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteShoppingItem(shoppingItem)
         }
 
-    private fun insertShoppingItemIntoDb(shoppingItem: ShoppingItem) =
+    fun insertShoppingItemIntoDb(shoppingItem: ShoppingItem) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertShoppingItem(shoppingItem)
         }

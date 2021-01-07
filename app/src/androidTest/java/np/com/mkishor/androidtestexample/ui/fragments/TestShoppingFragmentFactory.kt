@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentFactory
 import com.bumptech.glide.RequestManager
 import np.com.mkishor.androidtestexample.adapters.ImageAdapter
 import np.com.mkishor.androidtestexample.adapters.ShoppingItemAdapter
+import np.com.mkishor.androidtestexample.repositories.FakeShoppingRepositoryAndroidTest
+import np.com.mkishor.androidtestexample.ui.viewmodels.ShoppingViewModel
 import javax.inject.Inject
 
 
@@ -14,7 +16,7 @@ import javax.inject.Inject
  * @email:  mainalikishor@outlook.com
  *
  */
-class ShoppingFragmentFactory @Inject constructor(
+class TestShoppingFragmentFactory @Inject constructor(
     private val imageAdapter: ImageAdapter,
     private val glide: RequestManager,
     private val shoppingItemAdapter: ShoppingItemAdapter
@@ -26,7 +28,10 @@ class ShoppingFragmentFactory @Inject constructor(
         return when (className) {
             ImagePickFragment::class.java.name -> ImagePickFragment(imageAdapter)
             AddShoppingItemFragment::class.java.name -> AddShoppingItemFragment(glide)
-            ShoppingItemFragment::class.java.name -> ShoppingItemFragment(shoppingItemAdapter)
+            ShoppingItemFragment::class.java.name -> ShoppingItemFragment(
+                shoppingItemAdapter,
+                viewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
+            )
             else -> return super.instantiate(classLoader, className)
         }
 
